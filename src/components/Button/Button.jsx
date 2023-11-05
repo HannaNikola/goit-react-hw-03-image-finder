@@ -1,5 +1,7 @@
 export const Button = () => {
     return (
-        <div></div>
+        <div>
+            <button>Load more...</button>
+        </div>
     )
 }
