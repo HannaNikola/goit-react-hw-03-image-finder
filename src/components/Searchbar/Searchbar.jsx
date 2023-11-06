@@ -2,7 +2,7 @@ import { Component } from "react"
 
 export class Searchbar extends Component {
     state = {
-        query: '',
+    query: '',
 
     }
 
@@ -14,12 +14,7 @@ export class Searchbar extends Component {
         event.preventDefault();
         this.props.onSubmit(this.state.query);
     }
-// handlSubmit = evt => {
-  //   evt.preventDefault();
-  //   this.handleSearchSubmit(this.state.query);
-    
 
-  // }
 
     render() {
         return (

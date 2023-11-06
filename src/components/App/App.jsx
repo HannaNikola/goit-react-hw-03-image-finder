@@ -2,7 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
-import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+
 import { Loader } from '../Loader/Loader';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
@@ -23,8 +23,8 @@ export class App extends Component {
     
     try {
       this.setState({ loading: true, error: false });
-      const handleImages = await fetchImages();
-      this.setState({ images: handleImages })
+      const getImages = await fetchImages();
+      this.setState({ images: getImages })
 
     } catch (error) {
         this.setState({ error: true });
@@ -36,6 +36,7 @@ export class App extends Component {
    }
   
   componentDidUpdate(prevProps, prevState) { 
+  
   }
   handleSearch = (query) => {
     
@@ -44,14 +45,14 @@ export class App extends Component {
   
  
  
- render() {
-    
-    const { loading, error } = this.state;
+  render() {
+   const { loading, error, images } = this.state;
+
+
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery />
-        <ImageGalleryItem/>
+         <ImageGallery images={images} />
         <Loader loading={loading} error={error} />
         <Button />
         <Modal/>
