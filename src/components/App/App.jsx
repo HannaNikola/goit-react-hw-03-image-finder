@@ -18,9 +18,9 @@ export class App extends Component {
   };
 
 
-  
+
   async componentDidMount() {
-    
+
     try {
       this.setState({ loading: true, error: false });
       const getImages = await fetchImages();
@@ -28,35 +28,35 @@ export class App extends Component {
       this.setState({ images: getImages.hits })
 
     } catch (error) {
-        this.setState({ error: true });
-        console.error('something went wrong, please reload this page ', error);
-      } finally {
-         this.setState({ loading: false });
-       }
-    
-   }
-  
-  componentDidUpdate(prevProps, prevState) { 
-  
+      this.setState({ error: true });
+      console.error('something went wrong, please reload this page ', error);
+    } finally {
+      this.setState({ loading: false });
+    }
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+
   }
   handleSearch = (query) => {
-    
+
     console.log("Search query:", query);
   };
-  
- 
- 
+
+
+
   render() {
-   const { loading, error, images } = this.state;
+    const { loading, error, images } = this.state;
 
 
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
-         <ImageGallery images={images} />
+        <ImageGallery images={images} />
         <Loader loading={loading} error={error} />
         <Button />
-        <Modal/>
+        <Modal />
       </>
     )
   }
