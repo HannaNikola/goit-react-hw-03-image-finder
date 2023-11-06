@@ -1,12 +1,12 @@
 import { Component } from 'react';
-
+import axios from 'axios';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import { Loader } from '../Loader/Loader';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
-import { fetchQuizzes } from 'components/Api';
+import { fetchImages } from 'components/Api';
 
 export class App extends Component {
   state = {
@@ -17,37 +17,39 @@ export class App extends Component {
     error: false,
   };
 
-  hendleSearchSubmit = async (query) => {
+
+  
+  async componentDidMount(query) {
     
-    try { 
+    try {
+      this.setState({ loading: true, error: false });
+      const handleImages = await fetchImages();
+      this.setState({ images: handleImages })
+
+    } catch (error) {
+        this.setState({ error: true });
+        console.error('something went wrong, please reload this page ', error);
+      } finally {
+         this.setState({ loading: false });
+       }
     
-      this.setState({ loading: true , error: false});
-      const fethcImages = await fetchQuizzes(query);
-      this.setState({ images: fethcImages })
-    
-      
-    }
-    catch (error) {
-      this.setState({ error: true });
-      console.error('something went wrong, please reload this page ', error);
-    } finally {
-      this.setState({ loading: false });
-    }
+   }
+  
+  componentDidUpdate(prevProps, prevState) { 
   }
+  handleSearch = (query) => {
+    
+    console.log("Search query:", query);
+  };
+  
  
-
-
-
-
-
-
-
-  render() {
+ 
+ render() {
     
     const { loading, error } = this.state;
     return (
       <>
-        <Searchbar onSubmit={this.handleSearchSubmit} />
+        <Searchbar onSubmit={this.handleSearch} />
         <ImageGallery />
         <ImageGalleryItem/>
         <Loader loading={loading} error={error} />
