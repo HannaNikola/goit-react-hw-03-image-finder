@@ -11,7 +11,7 @@ import { fetchImages } from 'components/Api';
 export class App extends Component {
   state = {
     query: '',
-    images: [],
+    images:[{}],
     page: 1,
     loading: false,
     error: false,
@@ -19,12 +19,13 @@ export class App extends Component {
 
 
   
-  async componentDidMount(query) {
+  async componentDidMount() {
     
     try {
       this.setState({ loading: true, error: false });
       const getImages = await fetchImages();
-      this.setState({ images: getImages })
+      console.log(getImages)
+      this.setState({ images: getImages.hits })
 
     } catch (error) {
         this.setState({ error: true });
