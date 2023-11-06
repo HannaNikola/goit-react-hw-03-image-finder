@@ -11,7 +11,7 @@ import { fetchImages } from 'components/Api';
 export class App extends Component {
   state = {
     query: '',
-    images:[],
+    images: [],
     page: 1,
     loading: false,
     error: false,
