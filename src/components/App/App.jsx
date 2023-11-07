@@ -20,7 +20,7 @@ export class App extends Component {
 
 
   async componentDidMount() {
-
+    fetchImages()
     try {
       this.setState({ loading: true, error: false });
       const getImages = await fetchImages();
@@ -35,15 +35,29 @@ export class App extends Component {
     }
 
   }
+  
 
-  componentDidUpdate(prevProps, prevState) {
-
+  async componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
+     await fetchImages(); 
+      
+    }
   }
-  handleSearch = (query) => {
 
-    console.log("Search query:", query);
+  handleLoadMore = () => {
+    this.setState((prevState) => ({ page: prevState.page + 1 }));
   };
 
+  handleSearch = (query) => {
+    this.setState({ query, page: 1, images: [] });
+  };
+
+  handleImageClick = (imageURL) => {
+    this.setState({ showModal: true, selectedImage: imageURL });
+  };
 
 
   render() {
@@ -55,7 +69,7 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSearch} />
         <ImageGallery images={images} />
         <Loader loading={loading} error={error} />
-        <Button />
+        <Button onClick={this.handleLoadMore} />
         <Modal />
       </>
     )
