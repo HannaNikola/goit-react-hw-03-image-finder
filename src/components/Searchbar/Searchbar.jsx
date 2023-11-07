@@ -1,4 +1,6 @@
-import { Component } from "react"
+import { Component } from "react";
+import { SearchbarStyle } from "./Searchbar.styled"
+
 
 export class Searchbar extends Component {
     state = {
@@ -18,7 +20,7 @@ export class Searchbar extends Component {
 
     render() {
         return (
-            <header className="searchbar">
+            <SearchbarStyle className="searchbar">
                 <form className="form" onSubmit={this.handleSubmit}>
                     <button type="submit" className="button">
                         <span className="button-label">Search</span>
@@ -35,7 +37,7 @@ export class Searchbar extends Component {
                         
                     />
                 </form>
-            </header>
+            </SearchbarStyle>
         );
     }
 }
