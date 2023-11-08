@@ -17,21 +17,17 @@ export class App extends Component {
     error: false,
   };
 
+  componentDidMount() {
+  console.log('I mounted!')
+}
 
-
-  async componentDidMount() {
-    this.searchImages()
-    
-
-  }
-  
-
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
+    console.log('I updated!')
     if (
-      prevProps.query !== this.state.query ||
+      prevState.query !== this.state.query ||
       prevState.page !== this.state.page
     ) {
-      await this.searchImages();
+      this.searchImages();
     }
   }
 
@@ -39,37 +35,27 @@ export class App extends Component {
     const { query, page } = this.state;
     try {
       this.setState({ loading: true, error: false });
-      const getImages = await fetchImages(query, page);
-      this.setState({ images: getImages.data.hits });
+      const response = await fetchImages(query, page);
+      this.setState((prevState) => ({
+        images: [...prevState.images, ...response.hits],
+        loading: false,
+      }));
     } catch (error) {
-      this.setState({ error: true });
-      console.error('something went wrong, please reload this page ', error);
-    } finally {
-      this.setState({ loading: false });
+      this.setState({ error: true, loading: false });
+      console.error('Something went wrong:', error);
     }
-  }
+  };
 
-
-
-
-
-  
   handleLoadMore = () => {
     this.setState((prevState) => ({ page: prevState.page + 1 }));
   };
 
   handleSearch = (query) => {
-    this.setState({ query, page: 1, images: [] });
+    this.setState({ query: query, page: 1, images: [] });
   };
-
-  handleImageClick = (imageURL) => {
-    this.setState({ showModal: true, selectedImage: imageURL });
-  };
-
 
   render() {
     const { loading, error, images } = this.state;
-
 
     return (
       <>
@@ -79,7 +65,8 @@ export class App extends Component {
         <Button onClick={this.handleLoadMore} />
         <Modal />
       </>
-    )
+    );
   }
 }
 
+export default App;
