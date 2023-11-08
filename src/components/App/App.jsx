@@ -20,19 +20,8 @@ export class App extends Component {
 
 
   async componentDidMount() {
-    fetchImages()
-    try {
-      this.setState({ loading: true, error: false });
-      const getImages = await fetchImages();
-      console.log(getImages)
-      this.setState({ images: getImages.hits })
-
-    } catch (error) {
-      this.setState({ error: true });
-      console.error('something went wrong, please reload this page ', error);
-    } finally {
-      this.setState({ loading: false });
-    }
+    this.searchImages()
+    
 
   }
   
@@ -42,11 +31,29 @@ export class App extends Component {
       prevProps.query !== this.state.query ||
       prevState.page !== this.state.page
     ) {
-     await fetchImages(); 
-      
+      await this.searchImages();
     }
   }
 
+  searchImages = async () => {
+    const { query, page } = this.state;
+    try {
+      this.setState({ loading: true, error: false });
+      const getImages = await fetchImages(query, page);
+      this.setState({ images: getImages.data.hits });
+    } catch (error) {
+      this.setState({ error: true });
+      console.error('something went wrong, please reload this page ', error);
+    } finally {
+      this.setState({ loading: false });
+    }
+  }
+
+
+
+
+
+  
   handleLoadMore = () => {
     this.setState((prevState) => ({ page: prevState.page + 1 }));
   };

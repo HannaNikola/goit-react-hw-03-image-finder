@@ -8,14 +8,17 @@ export class Searchbar extends Component {
 
     }
 
-    handleChange = (event) => {
-    this.setState({ query: event.target.value });
-};
-
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.state.query);
+        
     }
+    handleChange = (event) => {
+        this.setState({ query: event.target.value });
+        
+};
+
+   
 
 
     render() {
