@@ -1,5 +1,5 @@
 
-import { GalleryIitem } from "./ImageGalleryItem.styled";
+import { GalleryIitem, Image } from "./ImageGalleryItem.styled";
 import { Component } from "react";
 import Modal from 'react-modal';
     
@@ -49,14 +49,14 @@ export class ImageGalleryItem extends Component {
         
         return (
             <GalleryIitem className="GalleryItem">
-                <img src={image.webformatURL} alt="" onClick={this.openModal} />
+                <Image src={image.webformatURL} alt="" onClick={this.openModal} />
                 <Modal
                     isOpen={isModalOpen}
                     onRequestClose={this.closeModal}
                     style={customStyles}
                     contentLabel="Large Image Modal"
                 >
-                    <img src={image.webformatURL} alt="description" />
+                    <Image src={image.webformatURL} alt="description" />
                     
                 </Modal>
             </GalleryIitem>
@@ -64,24 +64,4 @@ export class ImageGalleryItem extends Component {
     }
 
 }
-
-
-
-
-// export const ImageGalleryItem = ({ image }) => {
-//     return (
-//         <GalleryIitem className="GalleryItem">
-//             <img src={image.webformatURL} alt="" />
-//             <Modal
-//                 isOpen={true}
-//                 // onRequestClose={closeModal}
-//                 style={customStyles}
-//                 contentLabel="Example Modal"
-//             >
-//                 <div>I am a modal</div>
-                
-//             </Modal>
-//         </GalleryIitem>
-//     )
-// }
 

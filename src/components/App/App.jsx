@@ -7,7 +7,7 @@ import { Loader } from '../Loader/Loader';
 import { Button } from '../Button/Button';
 
 import { fetchImages } from 'components/Api';
-
+import { Layout } from './App.styled'
 
 
 export class App extends Component {
@@ -66,12 +66,12 @@ export class App extends Component {
     const showLoadMoreButton = images.length > 0;
 
     return (
-      <>
+      <Layout>
         <Searchbar onSubmit={this.handleSearch} />
         <ImageGallery images={images} openModal={this.openModal} />
         <Loader loading={loading} error={error} />
         {showLoadMoreButton && <Button onClick={this.handleLoadMore} />}
-      </>
+        </Layout>
     );
   }
 }
