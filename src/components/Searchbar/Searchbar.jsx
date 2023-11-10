@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { SearchbarStyle } from "./Searchbar.styled"
+import { SearchbarStyle } from "./Searchbar.styled";
 
 
 export class Searchbar extends Component {
@@ -10,6 +10,7 @@ export class Searchbar extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(this.state.query)
         this.props.onSubmit(this.state.query);
         
     }

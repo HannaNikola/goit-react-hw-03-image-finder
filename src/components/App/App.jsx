@@ -5,8 +5,10 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 
 import { Loader } from '../Loader/Loader';
 import { Button } from '../Button/Button';
-import { Modal } from '../Modal/Modal';
+
 import { fetchImages } from 'components/Api';
+
+
 
 export class App extends Component {
   state = {
@@ -54,16 +56,21 @@ export class App extends Component {
     this.setState({ query: query, page: 1, images: [] });
   };
 
+
+  
+
+
+
   render() {
     const { loading, error, images } = this.state;
+    const showLoadMoreButton = images.length > 0;
 
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery images={images} />
+        <ImageGallery images={images} openModal={this.openModal} />
         <Loader loading={loading} error={error} />
-        <Button onClick={this.handleLoadMore} />
-        <Modal />
+        {showLoadMoreButton && <Button onClick={this.handleLoadMore} />}
       </>
     );
   }

@@ -13,3 +13,5 @@ export const ImageGallery = ({ images }) => {
         </Gallery  >
     )
 }
+
+
