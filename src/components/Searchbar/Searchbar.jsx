@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { SearchbarStyle, Input, ButtonLabel, Button, Form } from "./Searchbar.styled";
-
+import { AiOutlineSearch } from "react-icons/ai";
 
 export class Searchbar extends Component {
     state = {
@@ -18,7 +18,7 @@ export class Searchbar extends Component {
         this.setState({ query: event.target.value });
         
 };
-
+    
    
 
 
@@ -27,6 +27,7 @@ export class Searchbar extends Component {
             <SearchbarStyle className="searchbar">
                 <Form className="form" onSubmit={this.handleSubmit}>
                     <Button type="submit" className="button">
+                        <AiOutlineSearch />
                         <ButtonLabel className="button-label">Search</ButtonLabel>
                     </Button>
 

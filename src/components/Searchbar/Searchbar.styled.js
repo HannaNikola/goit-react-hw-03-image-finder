@@ -2,6 +2,8 @@
 import styled from 'styled-components';
 
 
+
+
 export const SearchbarStyle = styled.header`
   top: 0;
   left: 0;
@@ -77,8 +79,6 @@ export const Input = styled.input`
     font-size: 18px;
   }
 `
-
-
 
 
 
